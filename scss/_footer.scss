@@ -1,19 +1,22 @@
 .app-footer {
   text-align: center;
-  padding: 12px 20px 18px;
-  font-size: 0.82rem;
+  padding-bottom: 20px;
+  font-size: 1rem;
   color: rgba(255, 255, 255, 0.9);
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.55);
   transition: color 0.4s ease;
 }
+
 body.is-night .app-footer {
   color: rgba(220, 228, 245, 0.78);
 }
+
 .app-footer a {
   color: inherit;
   text-decoration: underline;
   font-weight: 600;
 }
+
 .app-footer a:hover {
   color: #fff;
 }

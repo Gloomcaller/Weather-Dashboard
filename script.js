@@ -17,9 +17,35 @@ const geoBtn = document.getElementById("geoBtn");
 const refreshBtn = document.getElementById("refreshBtn");
 const unitToggle = document.getElementById("unitToggle");
 
-// events
+let searchTimer = null;
 
-form.addEventListener("submit", onSearch);
+// events
+input.addEventListener("input", () => {
+    const query = input.value.trim();
+    clearTimeout(searchTimer);
+
+    if (query.length < 2) {
+        ui.hideDropdown();
+        return;
+    }
+
+    searchTimer = setTimeout(() => runLiveSearch(query), 300);
+});
+
+form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const first = document.querySelector("#cityDropdown li");
+    if (first) {
+        first.click();
+        return;
+    }
+    const query = input.value.trim();
+    if (query.length >= 2) {
+        clearTimeout(searchTimer);
+        runLiveSearch(query);
+    }
+});
+
 geoBtn.addEventListener("click", onGeolocate);
 refreshBtn.addEventListener("click", onRefresh);
 unitToggle.addEventListener("click", onUnitToggle);
@@ -30,29 +56,19 @@ document.addEventListener("click", (e) => {
 });
 
 // handlers
-
-async function onSearch(e) {
-    e.preventDefault();
-    const query = input.value.trim();
-    if (!query) return;
-
-    ui.showSpinner();
+async function runLiveSearch(query) {
     try {
         const results = await api.searchCity(query);
         if (results.length === 0) {
-            ui.hideSpinner();
-            ui.renderError("City not found.");
+            ui.hideDropdown();
             return;
         }
-        if (results.length === 1) {
-            await loadWeather(results[0]);
-            return;
-        }
-        ui.hideSpinner();
-        ui.showDropdown(results, loadWeather);
-    } catch (err) {
-        ui.hideSpinner();
-        ui.renderError(err.message || "Search failed.");
+        ui.showDropdown(results, (city) => {
+            input.value = "";
+            loadWeather(city);
+        });
+    } catch {
+        ui.hideDropdown();
     }
 }
 
@@ -101,7 +117,6 @@ function onUnitToggle(e) {
 }
 
 // main flow
-
 async function loadWeather(city) {
     ui.showSpinner();
     try {
@@ -115,7 +130,6 @@ async function loadWeather(city) {
         state.aqi = aqi;
 
         storage.setLastCity(city);
-        if (city.name !== "My Location") storage.addRecent(city);
 
         renderAll();
     } catch (err) {
@@ -144,7 +158,6 @@ function renderAll() {
 }
 
 // boot
-
 function boot() {
     ui.init();
     bg.initBackgrounds();
@@ -155,5 +168,8 @@ function boot() {
     const last = storage.getLastCity();
     if (last) loadWeather(last);
 }
+
+// dev only: run clearWeatherCache() in the console to force fresh data
+window.clearWeatherCache = () => import("./modules/cache.js").then((c) => c.clear());
 
 boot();

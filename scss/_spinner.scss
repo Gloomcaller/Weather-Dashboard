@@ -10,6 +10,7 @@
   z-index: 200;
   animation: fadeIn 0.2s ease;
 }
+
 .spinner-overlay[hidden] {
   display: none;
 }
@@ -28,6 +29,7 @@
     transform: rotate(360deg);
   }
 }
+
 @keyframes fadeIn {
   from {
     opacity: 0;

@@ -4,6 +4,7 @@
   gap: 14px;
   flex: 1;
 }
+
 .sun-item {
   display: flex;
   flex-direction: column;
@@ -14,20 +15,23 @@
   border-radius: 12px;
   transition: background 0.4s ease;
 }
+
 .sun-item img {
-  width: 30px;
-  height: 30px;
+  width: 34px;
+  height: 34px;
   margin-bottom: 4px;
   object-fit: contain;
 }
+
 .sun-item .label {
-  font-size: 0.78rem;
+  font-size: 0.85rem;
   color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.8px;
 }
+
 .sun-item .value {
   font-weight: 700;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   color: var(--text);
 }

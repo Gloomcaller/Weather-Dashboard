@@ -20,7 +20,7 @@ export function setBackground(category, isDay) {
 
     const file = CATEGORIES.has(category) ? category : "default";
     const folder = isDay ? "day" : "night";
-    const path = `${BASE_PATH}/${folder}/${file}.png`;
+    const path = `${BASE_PATH}/${folder}/${file}.jpg`;
 
     // already showing this image? bail.
     if (frontLayer.dataset.path === path) return;

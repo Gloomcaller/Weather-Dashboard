@@ -2,8 +2,7 @@
 
 const KEYS = {
     unit: "weather.unit",
-    lastCity: "weather.lastCity",
-    recents: "weather.recents",
+    lastCity: "weather.lastCity"
 };
 
 const MAX_RECENTS = 5;
@@ -41,21 +40,4 @@ export function getLastCity() {
 
 export function setLastCity(city) {
     write(KEYS.lastCity, city);
-}
-
-// recents is an array of city objects, most recent first
-export function getRecents() {
-    return read(KEYS.recents, []);
-}
-
-export function addRecent(city) {
-    const list = getRecents().filter(
-        (c) => !(c.name === city.name && c.country === city.country)
-    );
-    list.unshift(city);
-    write(KEYS.recents, list.slice(0, MAX_RECENTS));
-}
-
-export function clearRecents() {
-    write(KEYS.recents, []);
 }

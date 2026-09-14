@@ -39,10 +39,40 @@ export function init() {
 
     els.spinner = document.getElementById("spinner");
     els.cityDropdown = document.getElementById("cityDropdown");
+
+    els.hourlyStrip.addEventListener("wheel", (e) => {
+        if (e.deltaY === 0) return;
+        e.preventDefault();
+        els.hourlyStrip.scrollLeft += e.deltaY;
+    }, { passive: false });
+
+    // click-and-drag scrolling on the hourly strip
+    let isDown = false;
+    let startX = 0;
+    let startScroll = 0;
+
+    els.hourlyStrip.addEventListener("mousedown", (e) => {
+        isDown = true;
+        startX = e.pageX;
+        startScroll = els.hourlyStrip.scrollLeft;
+        els.hourlyStrip.classList.add("dragging");
+        e.preventDefault();
+    });
+
+    window.addEventListener("mousemove", (e) => {
+        if (!isDown) return;
+        const delta = e.pageX - startX;
+        els.hourlyStrip.scrollLeft = startScroll - delta;
+    });
+
+    window.addEventListener("mouseup", () => {
+        if (!isDown) return;
+        isDown = false;
+        els.hourlyStrip.classList.remove("dragging");
+    });
 }
 
 // current
-
 export function renderCurrent(city, current, unit) {
     els.cityName.textContent = city.name;
     els.placeSub.textContent = placeLabel(city);
@@ -54,7 +84,11 @@ export function renderCurrent(city, current, unit) {
     els.tempValue.textContent = formatTemp(current.temperature_2m, unit);
     els.tempUnit.textContent = unit === "f" ? "°F" : "°C";
     els.feelsLike.textContent = `${formatTemp(current.apparent_temperature, unit)}°`;
-    els.weatherDesc.textContent = info.label;
+    els.weatherDesc.textContent = moodSentence(
+        current.weather_code,
+        current.temperature_2m,
+        current.wind_speed_10m
+    );
 
     els.updatedAt.textContent = new Date().toLocaleTimeString([], {
         hour: "2-digit",
@@ -64,7 +98,6 @@ export function renderCurrent(city, current, unit) {
 }
 
 // details
-
 export function renderDetails(current, unit, daily) {
     els.dHumidity.textContent = `${current.relative_humidity_2m}%`;
 
@@ -81,14 +114,12 @@ export function renderDetails(current, unit, daily) {
 }
 
 // sun
-
 export function renderSun(daily) {
     els.sunrise.textContent = shortTime(daily.sunrise?.[0]);
     els.sunset.textContent = shortTime(daily.sunset?.[0]);
 }
 
 // air quality
-
 export function renderAqi(aqi) {
     if (!aqi || aqi.usAqi == null) {
         els.aqiValue.textContent = "—";
@@ -111,7 +142,6 @@ export function renderAqi(aqi) {
 }
 
 // hourly
-
 export function renderHourly(hourly, offsetSeconds, unit) {
     els.hourlyStrip.innerHTML = "";
 
@@ -137,20 +167,17 @@ export function renderHourly(hourly, offsetSeconds, unit) {
 
         cell.append(time, icon, temp);
 
-        const pop = hourly.precipitation_probability[i];
-        if (pop != null && pop > 0) {
-            const p = document.createElement("span");
-            p.className = "hour-pop";
-            p.textContent = `${pop}%`;
-            cell.appendChild(p);
-        }
+        const pop = hourly.precipitation_probability[i] ?? 0;
+        const p = document.createElement("span");
+        p.className = "hour-pop";
+        p.textContent = `${pop}%`;
+        cell.appendChild(p);
 
         els.hourlyStrip.appendChild(cell);
     }
 }
 
 // daily
-
 export function renderDaily(daily, unit) {
     els.dailyStrip.innerHTML = "";
     const names = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -198,7 +225,6 @@ export function renderDaily(daily, unit) {
 }
 
 // error
-
 export function renderError(message) {
     els.cityName.textContent = "—";
     els.placeSub.textContent = message;
@@ -207,10 +233,27 @@ export function renderError(message) {
     els.weatherDesc.textContent = "—";
     els.updatedAt.textContent = "—";
     els.currentIcon.src = "media/site/icons/cloudy.png";
+    els.currentIcon.alt = "Weather unavailable";
+
+    // clear the rest so stale data doesn't linger
+    els.dHumidity.textContent = "—";
+    els.dWind.textContent = "—";
+    els.windArrow.style.transform = "rotate(0deg)";
+    els.dPressure.textContent = "—";
+    els.dVisibility.textContent = "—";
+    els.dCloud.textContent = "—";
+    els.dUV.textContent = "—";
+
+    els.sunrise.textContent = "—";
+    els.sunset.textContent = "—";
+
+    renderAqi(null);
+
+    els.hourlyStrip.innerHTML = "";
+    els.dailyStrip.innerHTML = "";
 }
 
 // dropdown
-
 export function showDropdown(results, onPick) {
     els.cityDropdown.innerHTML = "";
     results.forEach((r) => {
@@ -241,7 +284,6 @@ export function hideDropdown() {
 }
 
 // spinner
-
 export function showSpinner() {
     els.spinner.hidden = false;
 }
@@ -250,8 +292,11 @@ export function hideSpinner() {
     els.spinner.hidden = true;
 }
 
-// theme + clock
+export function setSearchLoading(on) {
+    document.querySelector(".search-wrap")?.classList.toggle("loading", on);
+}
 
+// theme + clock
 export function setNightMode(isNight) {
     document.body.classList.toggle("is-night", isNight);
 }
@@ -274,7 +319,6 @@ export function updateClock(offsetSeconds) {
 }
 
 // helpers
-
 function placeLabel(city) {
     if (city.name === "My Location") return "Current position";
     const parts = [city.admin1, city.country].filter(Boolean);
@@ -313,4 +357,25 @@ function findCurrentHour(times, offsetSeconds) {
         if (times[i].slice(0, 13) >= cityNow) return i;
     }
     return 0;
+}
+
+function moodSentence(code, tempC, windKmh) {
+    const base = describeWmo(code, true).label.toLowerCase();
+
+    let feel;
+    if (tempC <= 0) feel = "freezing";
+    else if (tempC <= 8) feel = "very cold";
+    else if (tempC <= 15) feel = "cold";
+    else if (tempC <= 22) feel = "mild";
+    else if (tempC <= 28) feel = "warm";
+    else if (tempC <= 35) feel = "hot";
+    else feel = "very hot";
+
+    let wind = "";
+    if (windKmh >= 40) wind = ", and very windy";
+    else if (windKmh >= 25) wind = ", and windy";
+    else if (windKmh >= 15) wind = ", with a light breeze";
+
+    const cap = base.charAt(0).toUpperCase() + base.slice(1);
+    return `${cap}, ${feel}${wind}.`;
 }

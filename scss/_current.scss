@@ -13,7 +13,7 @@
 
 .current-place h1 {
   margin: 0;
-  font-size: 1.6rem;
+  font-size: 1.95rem;
   font-weight: 700;
   letter-spacing: -0.3px;
   color: var(--text);
@@ -21,7 +21,7 @@
 .place-sub {
   margin: 4px 0 0 0;
   color: var(--text-muted);
-  font-size: 0.92rem;
+  font-size: 1rem;
 }
 .local-time {
   display: inline-flex;
@@ -29,16 +29,16 @@
   gap: 6px;
   margin: 8px 0 0 0;
   color: var(--text-soft);
-  font-size: 0.85rem;
+  font-size: 0.92rem;
 }
 .inline-icon {
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
 }
 
 .current-icon {
-  width: 130px;
-  height: 130px;
+  width: 150px;
+  height: 150px;
   flex-shrink: 0;
 }
 .current-icon img {
@@ -58,7 +58,7 @@
   display: flex;
   align-items: flex-start;
   font-weight: 800;
-  font-size: clamp(3.6rem, 6vw, 5.4rem);
+  font-size: clamp(4rem, 6.5vw, 5.8rem);
   line-height: 1;
   letter-spacing: -3px;
   color: var(--warm);
@@ -66,7 +66,7 @@
   transition: color 0.4s ease;
 }
 .unit-suffix {
-  font-size: 1.6rem;
+  font-size: 1.75rem;
   font-weight: 700;
   margin-top: 10px;
   color: var(--text-muted);
@@ -78,16 +78,19 @@
   flex-direction: column;
   gap: 2px;
 }
+
 .feels-like {
   margin: 0;
   color: var(--text-muted);
-  font-size: 0.95rem;
+  font-size: 1.02rem;
 }
+
 .desc {
   margin: 0;
   font-weight: 700;
-  font-size: 1.15rem;
+  font-size: 2rem;
   color: var(--accent);
+  line-height: 1.3;
 }
 
 .current-footer {
@@ -98,7 +101,8 @@
   padding-top: 12px;
   margin-top: 6px;
 }
+
 .updated {
-  font-size: 0.82rem;
+  font-size: 0.88rem;
   color: var(--text-soft);
 }

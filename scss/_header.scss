@@ -21,13 +21,13 @@
   align-items: center;
   gap: 10px;
   font-weight: 700;
-  font-size: 1.15rem;
+  font-size: 1.3rem;
   letter-spacing: 0.3px;
   color: var(--text);
 }
 .brand-icon {
-  width: 34px;
-  height: 34px;
+  width: 40px;
+  height: 40px;
 }
 
 .search-form {
@@ -52,13 +52,18 @@
     box-shadow 0.2s,
     background 0.4s ease;
 }
+
+.search-wrap.loading {
+  opacity: 0.7;
+}
+
 .search-wrap:focus-within {
   box-shadow: 0 0 0 3px var(--accent-soft);
   border-color: var(--accent);
 }
 .search-icon {
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
   flex-shrink: 0;
   opacity: 0.9;
 }
@@ -69,7 +74,7 @@
   border: none;
   outline: none;
   padding: 0 10px;
-  font-size: 0.98rem;
+  font-size: 1.05rem;
   color: var(--text);
   height: 100%;
 }
@@ -94,6 +99,7 @@
   max-height: 320px;
   overflow-y: auto;
 }
+
 .city-dropdown li {
   padding: 10px 14px;
   display: flex;
@@ -103,23 +109,28 @@
   border-bottom: 1px solid var(--divider);
   transition: background 0.15s;
 }
+
 .city-dropdown li:last-child {
   border-bottom: none;
 }
+
 .city-dropdown li:hover,
 .city-dropdown li.active {
   background: var(--accent-soft);
 }
+
 .city-dropdown .city-name {
   font-weight: 600;
+  font-size: 1rem;
   color: var(--text);
 }
+
 .city-dropdown .city-sub {
-  font-size: 0.82rem;
+  font-size: 0.88rem;
   color: var(--text-muted);
 }
 
-// butt-ons :)
+// buttons
 .btn-icon {
   width: 44px;
   height: 44px;
@@ -129,20 +140,20 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition:
-    transform 0.15s,
-    background 0.2s;
+  transition: background 0.2s;
 }
+
 .btn-icon:hover {
-  transform: translateY(-1px);
   background: var(--accent);
 }
+
 .btn-icon:hover img {
   filter: brightness(0) invert(1);
 }
+
 .btn-icon img {
-  width: 22px;
-  height: 22px;
+  width: 24px;
+  height: 24px;
 }
 
 .btn-text {
@@ -153,18 +164,21 @@
   border: none;
   color: var(--accent);
   font-weight: 600;
+  font-size: 1rem;
   padding: 6px 8px;
   border-radius: 8px;
   transition:
     background 0.15s,
     color 0.4s ease;
 }
+
 .btn-text:hover {
   background: var(--accent-soft);
 }
+
 .btn-text img {
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
 }
 
 // unit toggle
@@ -177,6 +191,7 @@
   height: 44px;
   transition: background 0.4s ease;
 }
+
 .unit-toggle button {
   border: none;
   background: transparent;
@@ -184,13 +199,16 @@
   padding: 0 14px;
   border-radius: 9px;
   font-weight: 700;
+  font-size: 1.02rem;
   transition: all 0.18s;
 }
+
 .unit-toggle button.active {
   background: var(--accent);
   color: #fff;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
+
 body.is-night .unit-toggle button.active {
   color: #1a1f2e;
 }
