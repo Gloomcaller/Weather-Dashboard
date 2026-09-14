@@ -1,4 +1,4 @@
-# Weather App
+# Weather Dashboard
 
 A responsive and interactive weather dashboard built with **HTML**, **SCSS**, **JavaScript**, and the **Open-Meteo API**.
 This app allows users to search any city and view current conditions, hourly and 7-day forecasts, air quality, and more — no API key required.
