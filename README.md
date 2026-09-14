@@ -40,7 +40,7 @@ It is designed for developers and students looking to learn or integrate a clean
 
 ## Usage
 
-Live version: **[https://your-deployed-url.com](https://your-deployed-url.com)**
+Live version: **[Weather Dashboard](https://gloomcaller.github.io/Weather-Dashboard/)**
 
 1. Open the app in your browser.
 2. Type a city name into the search bar, results appear as you type.
@@ -55,8 +55,8 @@ Live version: **[https://your-deployed-url.com](https://your-deployed-url.com)**
 Want to run or tinker with it locally? ES modules require an `http://` origin, so opening `index.html` directly won't work.
 
 ```bash
-git clone https://github.com/Gloomcaller/JS-Weather-App.git
-cd JS-Weather-App
+git clone https://github.com/Gloomcaller/Weather-Dashboard
+cd Weather-Dashboard
 ```
 
 Serve it with any static server:
