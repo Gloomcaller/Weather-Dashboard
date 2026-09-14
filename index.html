@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="media/site/favicons/favicon32.png">
+    <title>Weather Dashboard</title>
+    <link rel="stylesheet" href="/scss/main.css">
+</head>
+
+<body>
+
+    <!-- background crossfade layers -->
+    <div class="bg-layer bg-a" id="bgA"></div>
+    <div class="bg-layer bg-b bg-hidden" id="bgB"></div>
+
+    <!-- header -->
+    <header class="app-header">
+        <div class="brand">
+            <img src="media/site/icons/partly-day.png" alt="" class="brand-icon">
+            <span>Weather</span>
+        </div>
+
+        <form class="search-form" id="searchForm" autocomplete="off">
+            <div class="search-wrap">
+                <img src="media/site/icons/search.png" alt="" class="search-icon">
+                <input type="text" id="cityInput" placeholder="Search a city..." spellcheck="false">
+                <ul class="city-dropdown" id="cityDropdown" hidden></ul>
+            </div>
+
+            <button type="button" class="btn-icon" id="geoBtn" title="Use my location" aria-label="Use my location">
+                <img src="media/site/icons/location.png" alt="">
+            </button>
+
+            <div class="unit-toggle" id="unitToggle" role="group" aria-label="Units">
+                <button type="button" data-unit="c" class="active">°C</button>
+                <button type="button" data-unit="f">°F</button>
+            </div>
+        </form>
+    </header>
+
+    <!-- dashboard -->
+    <main class="dashboard" id="dashboard">
+
+        <!-- current conditions -->
+        <section class="card card-current" id="currentCard">
+            <div class="current-top">
+                <div class="current-place">
+                    <h1 id="cityName">—</h1>
+                    <p class="place-sub" id="placeSub">Search a city to begin</p>
+                    <p class="local-time">
+                        <img src="media/site/icons/clock.png" alt="" class="inline-icon">
+                        <span id="localTime">—</span>
+                    </p>
+                </div>
+                <div class="current-icon">
+                    <img id="currentIcon" src="media/site/icons/cloudy.png" alt="Weather icon">
+                </div>
+            </div>
+
+            <div class="current-temp-row">
+                <div class="big-temp">
+                    <span id="tempValue">—</span>
+                    <span class="unit-suffix" id="tempUnit">°C</span>
+                </div>
+                <div class="current-meta">
+                    <p class="feels-like">Feels like <span id="feelsLike">—</span></p>
+                    <p class="desc" id="weatherDesc">—</p>
+                </div>
+            </div>
+
+            <div class="current-footer">
+                <span class="updated">Updated <span id="updatedAt">—</span></span>
+                <button type="button" class="btn-text" id="refreshBtn">
+                    <img src="media/site/icons/refresh.png" alt=""> Refresh
+                </button>
+            </div>
+        </section>
+
+        <!-- details -->
+        <section class="card card-details">
+            <h2 class="card-title">Details</h2>
+            <ul class="detail-list">
+                <li>
+                    <img src="media/site/icons/humidity.png" alt="">
+                    <span class="label">Humidity</span>
+                    <span class="value" id="dHumidity">—</span>
+                </li>
+                <li>
+                    <img src="media/site/icons/wind.png" alt="">
+                    <span class="label">Wind</span>
+                    <span class="value wind-value">
+                        <img class="wind-arrow" id="windArrow" src="media/site/icons/arrow.png" alt="">
+                        <span id="dWind">—</span>
+                    </span>
+                </li>
+                <li>
+                    <img src="media/site/icons/pressure.png" alt="">
+                    <span class="label">Pressure</span>
+                    <span class="value" id="dPressure">—</span>
+                </li>
+                <li>
+                    <img src="media/site/icons/visibility.png" alt="">
+                    <span class="label">Visibility</span>
+                    <span class="value" id="dVisibility">—</span>
+                </li>
+                <li>
+                    <img src="media/site/icons/cloud-cover.png" alt="">
+                    <span class="label">Cloud cover</span>
+                    <span class="value" id="dCloud">—</span>
+                </li>
+                <li>
+                    <img src="media/site/icons/uv.png" alt="">
+                    <span class="label">UV index</span>
+                    <span class="value" id="dUV">—</span>
+                </li>
+            </ul>
+        </section>
+
+        <!-- sun -->
+        <section class="card card-sun">
+            <h2 class="card-title">Sun</h2>
+            <div class="sun-row">
+                <div class="sun-item">
+                    <img src="media/site/icons/sunrise.png" alt="">
+                    <span class="label">Sunrise</span>
+                    <span class="value" id="sunrise">—</span>
+                </div>
+                <div class="sun-item">
+                    <img src="media/site/icons/sunset.png" alt="">
+                    <span class="label">Sunset</span>
+                    <span class="value" id="sunset">—</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- air quality -->
+        <section class="card card-aqi">
+            <h2 class="card-title">Air quality</h2>
+            <div class="aqi-main">
+                <span class="aqi-value" id="aqiValue">—</span>
+                <span class="aqi-label" id="aqiLabel">—</span>
+            </div>
+            <ul class="aqi-list">
+                <li><span class="label">PM2.5</span><span class="value" id="aqiPm25">—</span></li>
+                <li><span class="label">US AQI</span><span class="value" id="aqiUs">—</span></li>
+                <li><span class="label">EU AQI</span><span class="value" id="aqiEu">—</span></li>
+            </ul>
+        </section>
+
+        <!-- hourly -->
+        <section class="card card-hourly">
+            <h2 class="card-title">Next 24 hours</h2>
+            <div class="hourly-strip" id="hourlyStrip"></div>
+        </section>
+
+        <!-- 7-day -->
+        <section class="card card-daily">
+            <h2 class="card-title">7-day forecast</h2>
+            <div class="daily-strip" id="dailyStrip"></div>
+        </section>
+
+    </main>
+
+    <!-- spinner -->
+    <div class="spinner-overlay" id="spinner" hidden>
+        <div class="spinner"></div>
+    </div>
+
+    <!-- footer -->
+    <footer class="app-footer">
+        Weather data by <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo.com</a>
+    </footer>
+
+    <script type="module" src="script.js"></script>
+</body>
+
+</html>

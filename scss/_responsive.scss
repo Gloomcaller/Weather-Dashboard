@@ -1,0 +1,57 @@
+@use "variables" as v;
+
+// medium screens
+@media (max-width: v.$bp-medium) {
+  .dashboard {
+    grid-template-columns: 1.4fr 1fr;
+    grid-template-areas:
+      "current details"
+      "current sun"
+      "aqi     aqi"
+      "hourly  hourly"
+      "daily   daily";
+  }
+  .daily-strip { grid-template-columns: repeat(7, minmax(0, 1fr)); }
+}
+
+// mobile
+@media (max-width: v.$bp-small) {
+  .app-header {
+    flex-wrap: wrap;
+    padding: 12px 16px;
+    gap: 12px;
+  }
+  .brand { font-size: 1rem; }
+  .search-form { max-width: none; width: 100%; order: 3; }
+
+  .dashboard {
+    padding: 14px;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "current"
+      "details"
+      "sun"
+      "aqi"
+      "hourly"
+      "daily";
+  }
+
+  .current-icon { width: 90px; height: 90px; }
+  .big-temp { font-size: 3.4rem; letter-spacing: -2px; }
+  .unit-suffix { font-size: 1.2rem; margin-top: 6px; }
+
+  .daily-strip {
+    grid-template-columns: repeat(7, minmax(70px, 1fr));
+    overflow-x: auto;
+    padding-bottom: 6px;
+  }
+
+  .card { padding: 18px; }
+}
+
+@media (max-width: v.$bp-tiny) {
+  .city-dropdown { max-height: 240px; }
+  .current-place h1 { font-size: 1.25rem; }
+  .big-temp { font-size: 2.8rem; }
+  .current-icon { width: 72px; height: 72px; }
+}

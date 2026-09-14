@@ -1,0 +1,83 @@
+.aqi-main {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.aqi-value {
+  font-size: 2.6rem;
+  font-weight: 800;
+  letter-spacing: -1.5px;
+  line-height: 1;
+  color: var(--text);
+}
+.aqi-label {
+  font-weight: 700;
+  font-size: 0.92rem;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+.aqi-label[data-level="good"] {
+  background: rgba(76, 175, 80, 0.2);
+  color: #2e7d32;
+}
+.aqi-label[data-level="moderate"] {
+  background: rgba(255, 193, 7, 0.24);
+  color: #a06800;
+}
+.aqi-label[data-level="unhealthy-s"] {
+  background: rgba(255, 152, 0, 0.24);
+  color: #b35b00;
+}
+.aqi-label[data-level="unhealthy"] {
+  background: rgba(244, 67, 54, 0.22);
+  color: #b71c1c;
+}
+.aqi-label[data-level="very"] {
+  background: rgba(156, 39, 176, 0.22);
+  color: #6a1b9a;
+}
+.aqi-label[data-level="hazardous"] {
+  background: rgba(136, 14, 79, 0.28);
+  color: #880e4f;
+}
+
+body.is-night .aqi-label[data-level="good"] {
+  color: #81c784;
+}
+body.is-night .aqi-label[data-level="moderate"] {
+  color: #ffd54f;
+}
+body.is-night .aqi-label[data-level="unhealthy-s"] {
+  color: #ffb74d;
+}
+body.is-night .aqi-label[data-level="unhealthy"] {
+  color: #ef9a9a;
+}
+body.is-night .aqi-label[data-level="very"] {
+  color: #ce93d8;
+}
+body.is-night .aqi-label[data-level="hazardous"] {
+  color: #f48fb1;
+}
+
+.aqi-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.aqi-list li {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 0;
+  font-size: 0.9rem;
+}
+.aqi-list .label {
+  color: var(--text-muted);
+}
+.aqi-list .value {
+  font-weight: 700;
+  color: var(--text);
+}

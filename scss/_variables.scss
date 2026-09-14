@@ -1,0 +1,56 @@
+// breakpoints
+$bp-medium: 1200px;
+$bp-small: 800px;
+$bp-tiny: 480px;
+
+// day theme
+:root {
+  --font: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+
+  --card-bg: rgba(255, 255, 255, 0.78);
+  --card-bg-2: rgba(219, 234, 254, 0.72);
+  --card-border: rgba(255, 255, 255, 0.65);
+  --card-shadow: 0 10px 30px rgba(20, 60, 130, 0.18);
+
+  --text: #102a54;
+  --text-muted: #3f628f;
+  --text-soft: #6d8cb5;
+
+  --accent: #2b6fe4;
+  --accent-strong: #1a52ba;
+  --accent-soft: rgba(43, 111, 228, 0.14);
+
+  --warm: #e68400;
+  --warm-bright: #fbbf24;
+  --warm-soft: rgba(251, 191, 36, 0.22);
+
+  --divider: rgba(20, 60, 130, 0.12);
+  --veil: linear-gradient(180deg, rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0.18));
+
+  --radius: 18px;
+  --gap: 16px;
+  --backdrop-blur: 18px;
+}
+
+// night theme
+body.is-night {
+  --card-bg: rgba(17, 24, 39, 0.72);
+  --card-bg-2: rgba(31, 41, 55, 0.68);
+  --card-border: rgba(148, 163, 184, 0.14);
+  --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
+
+  --text: #eef2f8;
+  --text-muted: #a3adc2;
+  --text-soft: #6f7a91;
+
+  --accent: #fbbf24;
+  --accent-strong: #f59e0b;
+  --accent-soft: rgba(251, 191, 36, 0.16);
+
+  --warm: #fbbf24;
+  --warm-bright: #fcd34d;
+  --warm-soft: rgba(251, 191, 36, 0.14);
+
+  --divider: rgba(148, 163, 184, 0.12);
+  --veil: linear-gradient(180deg, rgba(2, 6, 23, 0.35), rgba(2, 6, 23, 0.62));
+}

@@ -1,0 +1,35 @@
+body {
+  font-family: var(--font);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #0c1220;
+  overflow-x: hidden;
+  transition: color 0.4s ease;
+}
+
+// background crossfade layers
+.bg-layer {
+  position: fixed;
+  inset: 0;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  transition: opacity 0.9s ease-in-out;
+  z-index: -2;
+}
+.bg-hidden {
+  opacity: 0;
+}
+
+// veil for legibility
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: var(--veil);
+  pointer-events: none;
+  transition: background 0.4s ease;
+}

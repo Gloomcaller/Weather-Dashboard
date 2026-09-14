@@ -1,0 +1,23 @@
+.dashboard {
+  flex: 1;
+  width: 100%;
+  max-width: 1920px;
+  margin: 0 auto;
+  padding: 20px 28px 28px;
+  display: grid;
+  gap: var(--gap);
+  grid-template-columns: 1.7fr 1.1fr 1fr;
+  grid-template-areas:
+    "current details sun"
+    "current details aqi"
+    "hourly  hourly  hourly"
+    "daily   daily   daily";
+  grid-template-rows: minmax(180px, auto) minmax(180px, auto) auto auto;
+}
+
+.card-current { grid-area: current; }
+.card-details { grid-area: details; }
+.card-sun     { grid-area: sun; }
+.card-aqi     { grid-area: aqi; }
+.card-hourly  { grid-area: hourly; }
+.card-daily   { grid-area: daily; }
