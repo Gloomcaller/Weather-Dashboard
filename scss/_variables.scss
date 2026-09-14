@@ -16,6 +16,8 @@ $bp-tiny: 480px;
   --text-muted: #3f628f;
   --text-soft: #6d8cb5;
 
+  --dropdown-bg: rgba(255, 255, 255, 0.96);
+
   --accent: #2b6fe4;
   --accent-strong: #1a52ba;
   --accent-soft: rgba(43, 111, 228, 0.14);
@@ -42,6 +44,8 @@ body.is-night {
   --text: #eef2f8;
   --text-muted: #a3adc2;
   --text-soft: #6f7a91;
+
+  --dropdown-bg: rgba(17, 24, 39, 0.96);
 
   --accent: #fbbf24;
   --accent-strong: #f59e0b;

@@ -1,6 +1,6 @@
 @use "variables" as v;
 
-// medium screens
+// medium screens (small desktop / tablet)
 @media (max-width: v.$bp-medium) {
   .dashboard {
     grid-template-columns: 1.4fr 1fr;
@@ -11,7 +11,9 @@
       "hourly  hourly"
       "daily   daily";
   }
-  .daily-strip { grid-template-columns: repeat(7, minmax(0, 1fr)); }
+  .daily-strip {
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+  }
 }
 
 // mobile
@@ -21,11 +23,21 @@
     padding: 12px 16px;
     gap: 12px;
   }
-  .brand { font-size: 1rem; }
-  .search-form { max-width: none; width: 100%; order: 3; }
+  .brand {
+    font-size: 1.15rem;
+  }
+  .brand-icon {
+    width: 36px;
+    height: 36px;
+  }
+  .search-form {
+    max-width: none;
+    width: 100%;
+    order: 3;
+  }
 
   .dashboard {
-    padding: 14px;
+    padding: 14px 14px 10px;
     grid-template-columns: 1fr;
     grid-template-areas:
       "current"
@@ -36,22 +48,108 @@
       "daily";
   }
 
-  .current-icon { width: 90px; height: 90px; }
-  .big-temp { font-size: 3.4rem; letter-spacing: -2px; }
-  .unit-suffix { font-size: 1.2rem; margin-top: 6px; }
-
-  .daily-strip {
-    grid-template-columns: repeat(7, minmax(70px, 1fr));
-    overflow-x: auto;
-    padding-bottom: 6px;
+  .card {
+    padding: 18px;
   }
 
-  .card { padding: 18px; }
+  // stack temp above meta, full-width mood sentence
+  .current-temp-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .current-icon {
+    width: 96px;
+    height: 96px;
+  }
+  .current-place h1 {
+    font-size: 1.6rem;
+  }
+  .big-temp {
+    font-size: 3.6rem;
+    letter-spacing: -2px;
+  }
+  .unit-suffix {
+    font-size: 1.3rem;
+    margin-top: 6px;
+  }
+  .desc {
+    font-size: 1.45rem;
+  }
+
+  // daily strip scrolls, no visible scrollbar
+  .daily-strip {
+    grid-template-columns: repeat(7, minmax(76px, 1fr));
+    overflow-x: auto;
+    padding-bottom: 6px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .daily-strip::-webkit-scrollbar {
+    display: none;
+  }
+
+  .app-footer {
+    font-size: 0.82rem;
+    padding: 6px 16px 16px;
+  }
 }
 
+// tiny phones
 @media (max-width: v.$bp-tiny) {
-  .city-dropdown { max-height: 240px; }
-  .current-place h1 { font-size: 1.25rem; }
-  .big-temp { font-size: 2.8rem; }
-  .current-icon { width: 72px; height: 72px; }
+  .city-dropdown {
+    max-height: 240px;
+  }
+  .city-dropdown li {
+    padding: 9px 12px;
+  }
+
+  .current-place h1 {
+    font-size: 1.4rem;
+  }
+  .place-sub {
+    font-size: 0.9rem;
+  }
+  .current-icon {
+    width: 78px;
+    height: 78px;
+  }
+  .big-temp {
+    font-size: 3rem;
+    letter-spacing: -1.5px;
+  }
+  .unit-suffix {
+    font-size: 1.1rem;
+    margin-top: 4px;
+  }
+  .desc {
+    font-size: 1.25rem;
+  }
+
+  .card {
+    padding: 16px 14px;
+  }
+  .card-title {
+    font-size: 0.82rem;
+    margin-bottom: 12px;
+  }
+
+  .aqi-value {
+    font-size: 2.4rem;
+  }
+  .aqi-label {
+    font-size: 0.9rem;
+  }
+
+  .unit-toggle button {
+    padding: 0 10px;
+    font-size: 0.95rem;
+  }
+
+  .detail-list .value {
+    font-size: 0.98rem;
+  }
+  .detail-list .label {
+    font-size: 0.9rem;
+  }
 }

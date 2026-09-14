@@ -7,6 +7,7 @@
   --text: #102a54;
   --text-muted: #3f628f;
   --text-soft: #6d8cb5;
+  --dropdown-bg: rgba(255, 255, 255, 0.96);
   --accent: #2b6fe4;
   --accent-strong: #1a52ba;
   --accent-soft: rgba(43, 111, 228, 0.14);
@@ -28,6 +29,7 @@ body.is-night {
   --text: #eef2f8;
   --text-muted: #a3adc2;
   --text-soft: #6f7a91;
+  --dropdown-bg: rgba(17, 24, 39, 0.96);
   --accent: #fbbf24;
   --accent-strong: #f59e0b;
   --accent-soft: rgba(251, 191, 36, 0.16);
@@ -196,7 +198,7 @@ body::after {
   top: calc(100% + 6px);
   left: 0;
   right: 0;
-  background: var(--card-bg);
+  background: var(--dropdown-bg);
   backdrop-filter: blur(var(--backdrop-blur));
   -webkit-backdrop-filter: blur(var(--backdrop-blur));
   border: 1px solid var(--card-border);
@@ -355,6 +357,7 @@ body.is-night .unit-toggle button.active {
 }
 
 .card {
+  min-width: 0;
   background: var(--card-bg);
   backdrop-filter: blur(var(--backdrop-blur));
   -webkit-backdrop-filter: blur(var(--backdrop-blur));
@@ -898,7 +901,11 @@ body.is-night .app-footer {
     gap: 12px;
   }
   .brand {
-    font-size: 1rem;
+    font-size: 1.15rem;
+  }
+  .brand-icon {
+    width: 36px;
+    height: 36px;
   }
   .search-form {
     max-width: none;
@@ -906,43 +913,100 @@ body.is-night .app-footer {
     order: 3;
   }
   .dashboard {
-    padding: 14px;
+    padding: 14px 14px 10px;
     grid-template-columns: 1fr;
     grid-template-areas: "current" "details" "sun" "aqi" "hourly" "daily";
   }
+  .card {
+    padding: 18px;
+  }
+  .current-temp-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
   .current-icon {
-    width: 90px;
-    height: 90px;
+    width: 96px;
+    height: 96px;
+  }
+  .current-place h1 {
+    font-size: 1.6rem;
   }
   .big-temp {
-    font-size: 3.4rem;
+    font-size: 3.6rem;
     letter-spacing: -2px;
   }
   .unit-suffix {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     margin-top: 6px;
   }
+  .desc {
+    font-size: 1.45rem;
+  }
   .daily-strip {
-    grid-template-columns: repeat(7, minmax(70px, 1fr));
+    grid-template-columns: repeat(7, minmax(76px, 1fr));
     overflow-x: auto;
     padding-bottom: 6px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
   }
-  .card {
-    padding: 18px;
+  .daily-strip::-webkit-scrollbar {
+    display: none;
+  }
+  .app-footer {
+    font-size: 0.82rem;
+    padding: 6px 16px 16px;
   }
 }
 @media (max-width: 480px) {
   .city-dropdown {
     max-height: 240px;
   }
-  .current-place h1 {
-    font-size: 1.25rem;
+  .city-dropdown li {
+    padding: 9px 12px;
   }
-  .big-temp {
-    font-size: 2.8rem;
+  .current-place h1 {
+    font-size: 1.4rem;
+  }
+  .place-sub {
+    font-size: 0.9rem;
   }
   .current-icon {
-    width: 72px;
-    height: 72px;
+    width: 78px;
+    height: 78px;
+  }
+  .big-temp {
+    font-size: 3rem;
+    letter-spacing: -1.5px;
+  }
+  .unit-suffix {
+    font-size: 1.1rem;
+    margin-top: 4px;
+  }
+  .desc {
+    font-size: 1.25rem;
+  }
+  .card {
+    padding: 16px 14px;
+  }
+  .card-title {
+    font-size: 0.82rem;
+    margin-bottom: 12px;
+  }
+  .aqi-value {
+    font-size: 2.4rem;
+  }
+  .aqi-label {
+    font-size: 0.9rem;
+  }
+  .unit-toggle button {
+    padding: 0 10px;
+    font-size: 0.95rem;
+  }
+  .detail-list .value {
+    font-size: 0.98rem;
+  }
+  .detail-list .label {
+    font-size: 0.9rem;
   }
 }/*# sourceMappingURL=main.css.map */
