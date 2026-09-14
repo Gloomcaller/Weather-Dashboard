@@ -1,4 +1,4 @@
-# Weather App
+# Weather Dashboard
 
 A responsive and interactive weather dashboard built with **HTML**, **SCSS**, **JavaScript**, and the **Open-Meteo API**.
 This app allows users to search any city and view current conditions, hourly and 7-day forecasts, air quality, and more — no API key required.
@@ -55,7 +55,7 @@ Live version: **[https://your-deployed-url.com](https://your-deployed-url.com)**
 Want to run or tinker with it locally? ES modules require an `http://` origin, so opening `index.html` directly won't work.
 
 ```bash
-git clone https://github.com/Gloomcaller/JS-Weather-App.git
+git clone https://github.com/Gloomcaller/Weather-Dashboard.git
 cd JS-Weather-App
 ```
 
