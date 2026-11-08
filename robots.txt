@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://gloomcaller.github.io/Weather-Dashboard/sitemap.xml
